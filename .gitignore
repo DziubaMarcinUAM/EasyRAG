@@ -1,0 +1,17 @@
+# Environmental Variables
+.env
+
+# Docs
+docs/
+!docs/.gitkeep
+
+# Dynamically generated directories
+chroma_db/
+__pycache__/
+
+# Venv (for testing)
+venv/
+.venv/
+
+# Google Cloud Key (Security)
+gcp-key.json

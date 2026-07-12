@@ -1,0 +1,11 @@
+services:
+  easyrag:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./docs:/app/docs
+      - ./chroma_db:/app/chroma_db
+      - ./gcp-key.json:/app/gcp-key.json:ro
+    stdin_open: true
+    tty: true
