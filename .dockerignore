@@ -1,0 +1,15 @@
+# Secrets — injected at runtime via docker-compose (env_file / volume mount),
+# must never be baked into image layers.
+.env
+gcp-key.json
+
+# Runtime data — mounted as volumes, not part of the image
+chroma_db/
+docs/
+
+# Local development artifacts
+venv/
+.venv/
+__pycache__/
+.git/
+.claude/
