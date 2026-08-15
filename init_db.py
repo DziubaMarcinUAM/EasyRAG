@@ -11,7 +11,13 @@ def build_database():
     print("Starting to build knowledge base...")
     
     # 1. Load documents
-    loader = DirectoryLoader(DOCS_PATH, glob="**/*.md", loader_cls=TextLoader)
+    # Explicit utf-8 so native Windows runs don't fall back to the system codepage.
+    loader = DirectoryLoader(
+        DOCS_PATH,
+        glob="**/*.md",
+        loader_cls=TextLoader,
+        loader_kwargs={"encoding": "utf-8"},
+    )
     documents = loader.load()
     
     if not documents:
@@ -26,7 +32,11 @@ def build_database():
     # 3. Save to Chroma DB
     embedding_model = get_embeddings()
     vectorstore = Chroma(persist_directory=DB_PATH, embedding_function=embedding_model)
-    
+
+    # Drop any previously indexed chunks so re-running init doesn't duplicate documents.
+    vectorstore.reset_collection()
+
+
     batch_size = 50
     for i in range(0, len(chunks), batch_size):
         batch = chunks[i:i + batch_size]

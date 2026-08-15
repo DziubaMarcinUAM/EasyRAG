@@ -23,6 +23,11 @@ DEFAULT_SYSTEM_PROMPT = (
 def _load_system_prompt() -> str:
     """Loads SYSTEM_PROMPT from .env and ensures it exposes the {context} placeholder."""
     system_prompt = os.getenv("SYSTEM_PROMPT") or DEFAULT_SYSTEM_PROMPT
+    # Escape literal braces (e.g. JSON examples in a custom prompt) so
+    # ChatPromptTemplate doesn't treat them as template variables,
+    # then restore the {context} placeholder.
+    system_prompt = system_prompt.replace("{", "{{").replace("}", "}}")
+    system_prompt = system_prompt.replace("{{context}}", "{context}")
     if "{context}" not in system_prompt:
         # Append the context block automatically so the retrieval chain can inject documents.
         system_prompt = f"{system_prompt}\n\nContext:\n{{context}}"
