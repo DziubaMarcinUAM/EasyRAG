@@ -2,7 +2,7 @@
 .env
 
 # Docs
-docs/
+docs/*
 !docs/.gitkeep
 
 # Dynamically generated directories

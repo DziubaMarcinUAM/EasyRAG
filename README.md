@@ -27,7 +27,7 @@ EasyRAG/
 ├── init.sh  / init.bat  # (Re)build the vector database
 ├── start.sh / start.bat # Run the chatbot
 ├── .env.example         # Template for environment configuration
-├── docs/                # Your Markdown knowledge base (create it)
+├── docs/                # Your Markdown knowledge base
 └── chroma_db/           # Auto-generated persistent vector store
 ```
 
@@ -58,10 +58,9 @@ If you use **Vertex AI**, place your service-account JSON at `./gcp-key.json` �
 
 ### 2. Add your knowledge base
 
-Create the `docs/` directory and drop any `*.md` files inside it (subdirectories are searched recursively):
+Drop any `*.md` files inside `docs/` directory (subdirectories are searched recursively):
 
 ```bash
-mkdir -p docs
 cp /path/to/your/notes/*.md docs/
 ```
 
@@ -180,6 +179,3 @@ The chain is assembled with LangChain's `create_retrieval_chain` + `create_stuff
 - **Changed the embedding provider or model** — Delete `chroma_db/` and re-run `init.sh` / `init.bat`; embeddings from different models are not interchangeable.
 - **Vertex AI auth errors** — Confirm that `gcp-key.json` is present in the project root and that the service account has the required Vertex AI permissions.
 
-## License
-
-No license file is provided. Add one before publishing to a public repository if you intend others to use, modify, or redistribute the code.
