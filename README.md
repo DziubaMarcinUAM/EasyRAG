@@ -64,7 +64,7 @@ Drop any `*.md` files inside `docs/` directory (subdirectories are searched recu
 cp /path/to/your/notes/*.md docs/
 ```
 
-### 3. Build the image
+### 3. Build the image (⚠️WARNING: Building Docker Image is lengthy process)
 
 Linux / macOS:
 
